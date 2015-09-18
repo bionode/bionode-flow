@@ -17,6 +17,12 @@ pipeline do
   ncbi.search \genome 'rodentia or arthropoda'
   ncbi.expand \assembly
   ncbi.expand \tax
+  stream ->
+    @data.lineage = @data.lineage.TaxaSet.Taxon[0].Lineage[0]
+    @push @data
+    @next!
+  stream ->
+    # Put here examples of download, alignments, etc
 
 # Helpers
 function stream f
